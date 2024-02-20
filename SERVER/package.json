@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "./src/server.ts",
+  "author": "João Paulo Dias Ventura (joaopdiasventura)",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@prisma/client": "^5.10.1",
+    "fastify": "^4.26.1",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.10.1",
+    "tsc": "^2.0.4",
+    "typescript": "^5.3.3"
+  }
+}
