@@ -8,15 +8,25 @@ datasource db {
 }
 
 model User {
-  email      String       @id @unique
-  name       String       @default("")
-  password   String       @default("")
+  email        String         @id @unique @default("") @db.VarChar(100)
+  name         String         @default("") @db.VarChar(50)
+  password     String         @default("") @db.VarChar(50)
+  picture      String         @default("https://icones.pro/wp-content/uploads/2021/02/icono-de-camara-gris.png") @db.VarChar(250)
+  points       Point[]
   achievements Achievements[]
 }
 
 model Achievements {
   id            Int    @id @default(autoincrement())
-  name          String
-  fk_user_email String
+  description   String @default("") @db.VarChar(50)
+  fk_user_email String @default("") @db.VarChar(100)
+  user          User   @relation(fields: [fk_user_email], references: [email])
+}
+
+model Point {
+  id            Int    @id @default(autoincrement())
+  score         Int    @default(0)
+  exercise      String @default("") @db.VarChar(40)
+  fk_user_email String @default("") @db.VarChar(100)
   user          User   @relation(fields: [fk_user_email], references: [email])
 }

@@ -4,13 +4,29 @@
   "main": "./src/server.ts",
   "author": "João Paulo Dias Ventura (joaopdiasventura)",
   "license": "MIT",
+  "scripts": {
+    "install-deps": "yarn install && prisma generate",
+    "build-and-start": "tsc && node dist/src/server.js",
+    "dev": "nodemon --watch src --exec ts-node src/server.ts -e ts",
+    "test": "jest"
+  },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.515.0",
     "@fastify/cors": "^9.0.1",
     "@prisma/client": "^5.10.1",
+    "dotenv": "^16.4.5",
     "fastify": "^4.26.1",
+    "fastify-multer": "^2.0.3",
     "jsonwebtoken": "^9.0.2",
+    "multer-s3": "^3.0.1",
     "prisma": "^5.10.1",
     "tsc": "^2.0.4",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "eslint": "^8.56.0"
   }
 }
