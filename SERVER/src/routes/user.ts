@@ -1,6 +1,7 @@
 import { FastifyInstance, RouteHandlerMethod } from "fastify";
 import multer from "fastify-multer";
 import {
+	GetUserParams,
 	LoginUserParams,
 	PictureParams,
 	RegisterUserParams,
@@ -11,6 +12,8 @@ import PictureRepository from "../repositories/User/picture";
 import { PictureController } from "../controllers/User/picture";
 import LoginUserRepository from "../repositories/User/login";
 import LoginUserController from "../controllers/User/login";
+import GetUserController from "../controllers/User/get";
+import GetUserRepository from "../repositories/User/get";
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -49,6 +52,23 @@ export default async function User(app: FastifyInstance): Promise<void> {
 			reply.code(500).send(error);
 		}
 	});
+
+	app.get("/user/:email", async (request, reply) => {
+		const Params = request.params as GetUserParams;
+
+		const Repository = new GetUserRepository();
+		const Controller = new GetUserController(Repository);
+
+		try {
+			const { body, statusCode } = await Controller.handle({
+				params: Params
+			});
+
+			reply.code(statusCode).send(body);
+		} catch (error) {
+			reply.code(500).send(error);
+		}
+	})
 
 	app.put(
 		"/picture",

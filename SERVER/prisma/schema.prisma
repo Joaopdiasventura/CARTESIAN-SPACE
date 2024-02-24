@@ -12,12 +12,14 @@ model User {
   name         String         @default("") @db.VarChar(50)
   password     String         @default("") @db.VarChar(50)
   picture      String         @default("https://icones.pro/wp-content/uploads/2021/02/icono-de-camara-gris.png") @db.VarChar(250)
+  score        Int            @default(0)
   points       Point[]
   achievements Achievements[]
 }
 
 model Achievements {
   id            Int    @id @default(autoincrement())
+  name          String @default("") @db.VarChar(20)
   description   String @default("") @db.VarChar(50)
   fk_user_email String @default("") @db.VarChar(100)
   user          User   @relation(fields: [fk_user_email], references: [email])

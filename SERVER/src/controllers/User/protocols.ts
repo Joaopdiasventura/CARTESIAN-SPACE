@@ -1,3 +1,4 @@
+import Achievement  from "../../models/Achievement";
 import User from "../../models/User";
 import { Message } from "../protocols";
 
@@ -31,9 +32,18 @@ export interface ILoginUserRepository{
 }
 
 export interface IGetUserRepository{
-    get(params: GetUserParams):Promise<User | Message>
+    get(params: GetUserParams):Promise<FullUser | Message>
 }
 
 export interface IPictureRepository {
   change(params: PictureParams): Promise<void | Message>;
+}
+
+export interface FullUser {
+  user: {
+    name: string;
+    picture: string;
+    score: number;
+  }
+  achievements: Achievement[]
 }
