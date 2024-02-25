@@ -8,21 +8,28 @@ datasource db {
 }
 
 model User {
-  email        String         @id @unique @default("") @db.VarChar(100)
-  name         String         @default("") @db.VarChar(50)
-  password     String         @default("") @db.VarChar(50)
-  picture      String         @default("https://icones.pro/wp-content/uploads/2021/02/icono-de-camara-gris.png") @db.VarChar(250)
-  score        Int            @default(0)
+  email        String              @id @unique @default("") @db.VarChar(100)
+  name         String              @default("") @db.VarChar(50)
+  password     String              @default("") @db.VarChar(50)
+  picture      String              @default("https://icones.pro/wp-content/uploads/2021/02/icono-de-camara-gris.png") @db.VarChar(250)
+  score        Int                 @default(0)
   points       Point[]
-  achievements Achievements[]
+  achievements user_achievement[]
 }
 
-model Achievements {
-  id            Int    @id @default(autoincrement())
-  name          String @default("") @db.VarChar(20)
-  description   String @default("") @db.VarChar(50)
-  fk_user_email String @default("") @db.VarChar(100)
-  user          User   @relation(fields: [fk_user_email], references: [email])
+model Achievement {
+  id                Int                 @id @default(autoincrement())
+  name              String              @default("") @db.VarChar(20) @unique
+  description       String              @default("") @db.VarChar(50)
+  User_Achievements user_achievement[]
+}
+
+model user_achievement {
+  id                Int          @id @default(autoincrement())
+  fk_user_email     String       @default("") @db.VarChar(100)
+  fk_achievement_id Int
+  user              User         @relation(fields: [fk_user_email], references: [email])
+  achievement       Achievement @relation(fields: [fk_achievement_id], references: [id])
 }
 
 model Point {

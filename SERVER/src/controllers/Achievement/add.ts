@@ -12,19 +12,12 @@ export default class AddAchievementController implements IController {
 		const { body } = request;
 
 		try {
-			const result = await this.repository.add(body);
-
-			if (result) {
-				return {
-					statusCode: 400,
-					body: result,
-				};
-			}
+			await this.repository.add(body);
 
 			return {
 				statusCode: 201,
 				body: {
-					message: "Conquista desbloqueada",
+					message: "Conquista criada",
 				},
 			};
 		} catch (error) {
