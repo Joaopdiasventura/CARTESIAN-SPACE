@@ -11,7 +11,7 @@ export interface ConnectAchievementParams {
 }
 
 export interface IAddAchievementRepository {
-    add(params: AddAchievementParams) : Promise<void>;
+    add(params: AddAchievementParams) : Promise<void | Message>;
 }
 
 export interface IConnectAchievementRepository {
