@@ -28,7 +28,7 @@ export default class ConnectAchievementRepository implements IConnectAchievement
             }
         }
 
-        if (prisma.user_achievement.findFirst({where: {...params}})) {
+        if (await prisma.user_achievement.findFirst({where: {...params}})) {
             return {
                 message: "Conquista já está desbloqueada"
             }
